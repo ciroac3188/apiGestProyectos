@@ -28,7 +28,7 @@ app.listen({ port: process.env.PORT || 3001 }, async () => {
 
 import {userModel} from "./src/models/usuarios.model.js"
 
-
+/////
 
 const obtenerUsuario = async () =>{
   await conexion();
@@ -54,11 +54,19 @@ const crearUsuario = async () =>{
   .then((u)=>{console.log("el esquema usuario fue creado :D " , u)})
   .catch((e)=>{console.log("rip no pudo crear el esquema :( ",e)})
 };
+///
 
-
+const editUsuario = async (a,b) =>{
+  const usuario = await userModel.updateOne(
+    {_id:a},
+    {$set:{
+      correo: b
+    }}
+  )}
 /* crearUsuario()  */
 
 obtenerUsuario() 
+/* editUsuario() */
 
 
 app.get("/usuarios" , (req,res)=>{
@@ -95,3 +103,15 @@ app.post("/usuarios/nuevo" , (req,res)=>{
   })
 
 } )
+
+app.patch("/usuarios/edit" , (req,res)=>{
+  console.log("alguien hizo patch en la ruta /edit")
+  const datosUsuario = req.body;
+  console.log(datosUsuario._id)
+
+  editUsuario(datosUsuario._id,datosUsuario.correo)
+  res.json("ok edit")
+
+ })
+
+
