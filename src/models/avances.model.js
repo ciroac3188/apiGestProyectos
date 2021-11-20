@@ -9,4 +9,4 @@ const avancechema = new mongoose.Schema({
    
 });
 
-module.exports = mongoose.model('avances', userSchema);
+module.exports = mongoose.model('avances', avancechema);

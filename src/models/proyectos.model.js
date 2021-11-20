@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const usuarioSchema = new mongoose.Schema({
+const proyectoSchema = new mongoose.Schema({
     nombre: String,                 
     presupuesto: Number,
     objetivosGenerales: Array,
@@ -14,4 +14,4 @@ const usuarioSchema = new mongoose.Schema({
     avances: Array,         //debria ser un array de id avances
 });
 
-module.exports = mongoose.model('usuarios', userSchema);
+module.exports = mongoose.model('usuarios', proyectoSchema);

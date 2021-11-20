@@ -10,4 +10,4 @@ const inscripcionSchema = new mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('inscripciones', userSchema);
+module.exports = mongoose.model('inscripciones', inscripcionSchema);
