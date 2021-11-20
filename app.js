@@ -1,20 +1,21 @@
+import {userModel} from "./src/models/usuarios.model.js"
+import {avanceModel} from "./src/models/avances.model.js"
+import {proyectoModel} from "./src/models/proyectos.model.js"
+import {inscripcioneModel} from "./src/models/inscripciones.model.js"
+
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import conexion from './src/db/db.js';
 
-const rutasUsuario = express.Router(); 
+
 
 
 dotenv.config();
-
-
-
 const app = express();
-
 app.use(express.json());
-
 app.use(cors());
+
 
 app.listen({ port: process.env.PORT || 3001 }, async () => {
   await conexion();
@@ -26,9 +27,9 @@ app.listen({ port: process.env.PORT || 3001 }, async () => {
 
 
 
-import {userModel} from "./src/models/usuarios.model.js"
 
-/////
+
+///// Crud basico usuario 
 
 const obtenerUsuario = async () =>{
   await conexion();
@@ -54,7 +55,7 @@ const crearUsuario = async () =>{
   .then((u)=>{console.log("el esquema usuario fue creado :D " , u)})
   .catch((e)=>{console.log("rip no pudo crear el esquema :( ",e)})
 };
-///
+
 
 const editUsuario = async (a,b) =>{
   const usuario = await userModel.updateOne(
@@ -63,11 +64,54 @@ const editUsuario = async (a,b) =>{
       correo: b
     }}
   )}
+
+const deleteUsuaruio = async (a) =>{
+  const usuario = await userModel.deleteOne({_id:id})
+}
+
+
 /* crearUsuario()  */
-
-obtenerUsuario() 
+/* obtenerUsuario()  */
 /* editUsuario() */
+/* deleteUsuaruio() */
 
+
+///// Crud basico proyecto
+
+const crearProyecto = async () =>{
+  await conexion();
+  await proyectoModel.create({                //el create es una promesa por lo tanto await
+    nombre: "proyectoDemo",                 
+    presupuesto: 100,
+    objetivosGenerales: ["Abc" , "bcd"],
+    objetivosEspecificos: ["Abc" , "bcd"],
+    fechaInicio: "10/10/10",
+    fechaFin: "10/10/11",
+    estado: "null",
+    faseProyecto: "iniciado",
+    inscritos: ["Abc" , "bcd"],       //debira ser un array de id inscritos
+    avances: ["Abc" , "bcd"],         //debria ser un array de id avances
+    lider: "619928cc31c7149262f9693c",
+     
+
+  })
+  .then((u)=>{console.log("el esquema proyecto fue creado :D " , u)})
+  .catch((e)=>{console.log("rip no pudo crear el esquema :( ",e)})
+};
+
+const obtenerProyecto = async () =>{
+  await conexion();
+  const proyectos = await proyectoModel.find().populate('lider')
+  .then((u)=>{console.log("trajo esto",u)})     // dentro del find puedo agregar props {nombreCompleto:"blabla"}
+  .catch((e)=>{console.log("No trajo nada :( ",e)})
+
+};
+
+ /* crearProyecto()   */
+ obtenerProyecto()  
+
+
+// Prueba de endpoints
 
 app.get("/usuarios" , (req,res)=>{
   console.log("alguien hizo get en la ruta /usuarios")
@@ -84,8 +128,6 @@ app.get("/usuarios" , (req,res)=>{
   })
 
 } )
-
-
 
 app.post("/usuarios/nuevo" , (req,res)=>{
   console.log("alguien hizo get en la ruta /nuevo")
@@ -114,4 +156,4 @@ app.patch("/usuarios/edit" , (req,res)=>{
 
  })
 
-
+////////////////////////////////////

@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
-const avancechema = new mongoose.Schema({
+const avancechema = new Schema({
 
     proyecto: Schema.Types.ObjectId,   //esta deberia ser una id de proyecto
     fechaAvance: String,
@@ -9,4 +10,7 @@ const avancechema = new mongoose.Schema({
    
 });
 
-module.exports = mongoose.model('avances', avancechema);
+
+
+const avanceModel = model("avance",avancechema,"avances") 
+export  {avanceModel}

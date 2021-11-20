@@ -1,17 +1,28 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
-const proyectoSchema = new mongoose.Schema({
+import {userModel} from "./usuarios.model.js"
+
+
+const proyectoSchema = new Schema({
     nombre: String,                 
     presupuesto: Number,
     objetivosGenerales: Array,
     objetivosEspecificos: Array,
     fechaInicio: String,
     fechaFin: String,
-    lider: Schema.Types.ObjectId,
     estado: String,
     faseProyecto: String,
     inscritos: Array,       //debira ser un array de id inscritos
     avances: Array,         //debria ser un array de id avances
-});
+    lider: {
+        type: Schema.Types.ObjectId,
+        ref: userModel,         
+    }
+},
 
-module.exports = mongoose.model('usuarios', proyectoSchema);
+);
+
+
+const proyectoModel = model("proyecto",proyectoSchema,"proyectos") 
+export  {proyectoModel}

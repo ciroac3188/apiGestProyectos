@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+const { Schema, model } = mongoose;
 
-const inscripcionSchema = new mongoose.Schema({
+const inscripcionSchema = new Schema({
 
     proyecto: Schema.Types.ObjectId,           //deberia ser una id de proyecto
     estudiante: Schema.Types.ObjectId,         //deberia ser una ide de estudiante
@@ -10,4 +11,7 @@ const inscripcionSchema = new mongoose.Schema({
     
 });
 
-module.exports = mongoose.model('inscripciones', inscripcionSchema);
+
+
+const inscripcioneModel = model("inscripcion",inscripcionSchema,"inscripciones") 
+export  {inscripcioneModel}
