@@ -1,10 +1,20 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
+import {proyectoModel} from "./proyectos.model.js"
+import {userModel} from "./usuarios.model.js"
+
 const inscripcionSchema = new Schema({
 
-    proyecto: Schema.Types.ObjectId,           //deberia ser una id de proyecto
-    estudiante: Schema.Types.ObjectId,         //deberia ser una ide de estudiante
+    
+    proyecto: {
+        type: Schema.Types.ObjectId,
+        ref: proyectoModel,         
+    },
+    estudiante: {
+        type: Schema.Types.ObjectId,
+        ref: userModel,         
+    },         
     estado: String,             
     fechaIngreso: String,
     fechaEgreso: String,

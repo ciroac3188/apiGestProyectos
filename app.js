@@ -108,8 +108,65 @@ const obtenerProyecto = async () =>{
 };
 
  /* crearProyecto()   */
- obtenerProyecto()  
+ /* obtenerProyecto()   */
 
+
+ ///////////////////////////////
+ const crearAvance = async () =>{
+  await conexion();
+  await avanceModel.create({                //el create es una promesa por lo tanto await
+    proyecto:"619964a1612b9243352d82bc",
+    fechaAvance: "10/10/10",
+    descripcion: "descripcion del avance",
+    observacionesLider:"Aqui las observaciones del lider"
+   
+     
+
+  })
+  .then((u)=>{console.log("el esquema avance fue creado :D " , u)})
+  .catch((e)=>{console.log("rip no pudo crear el esquema :( ",e)})
+};
+
+const obtenerAvance= async () =>{
+  await conexion();
+  const proyectos = await avanceModel.find().populate('proyecto')
+  .then((u)=>{console.log("trajo esto",u)})     // dentro del find puedo agregar props {nombreCompleto:"blabla"}
+  .catch((e)=>{console.log("No trajo nada :( ",e)})
+
+};
+
+
+/* crearAvance() */
+/* obtenerAvance() */
+
+//crud inscripciones
+
+const crearInscripcion = async () =>{
+  await conexion();
+  await inscripcioneModel.create({                //el create es una promesa por lo tanto await
+    proyecto:"619964a1612b9243352d82bc",
+    estudiante: "6199224f2adad48f89ecbbbe",
+    estado: "Activo",
+    fechaIngreso:"10/10/9",
+    fechaEgreso:"desconocida"
+   
+     
+
+  })
+  .then((u)=>{console.log("el esquema avance fue creado :D " , u)})
+  .catch((e)=>{console.log("rip no pudo crear el esquema :( ",e)})
+};
+
+const obtenerInscripcion= async () =>{
+  await conexion();
+  const proyectos = await inscripcioneModel.find().populate('proyecto').populate('estudiante')
+  .then((u)=>{console.log("trajo esto",u)})     // dentro del find puedo agregar props {nombreCompleto:"blabla"}
+  .catch((e)=>{console.log("No trajo nada :( ",e)})
+
+};
+/* crearInscripcion() */
+
+obtenerInscripcion()
 
 // Prueba de endpoints
 

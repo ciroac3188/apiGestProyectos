@@ -1,9 +1,15 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
+import {proyectoModel} from "./proyectos.model.js"
+
+
 const avancechema = new Schema({
 
-    proyecto: Schema.Types.ObjectId,   //esta deberia ser una id de proyecto
+    proyecto: {
+        type: Schema.Types.ObjectId,
+        ref: proyectoModel,         
+    },
     fechaAvance: String,
     descripcion: String,
     observacionesLider: String,
