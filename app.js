@@ -79,3 +79,19 @@ app.get("/usuarios" , (req,res)=>{
 
 
 
+app.post("/usuarios/nuevo" , (req,res)=>{
+  console.log("alguien hizo get en la ruta /nuevo")
+  const datosUsuario = req.body;
+
+  userModel.create(datosUsuario,(err,result) =>{
+
+      if(err){
+          res.status(500).send("error 400 enviar user")
+      }
+
+      else{
+          res.json(result)
+      }
+  })
+
+} )
