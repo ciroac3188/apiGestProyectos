@@ -166,7 +166,7 @@ const obtenerInscripcion= async () =>{
 };
 /* crearInscripcion() */
 
-obtenerInscripcion()
+/* obtenerInscripcion() */
 
 // Prueba de endpoints
 
@@ -214,3 +214,53 @@ app.patch("/usuarios/edit" , (req,res)=>{
  })
 
 ////////////////////////////////////
+
+app.get("/proyectos" , (req,res)=>{
+  console.log("alguien hizo get en la ruta /proyectos")
+
+  proyectoModel.find((err,result) =>{
+
+      if(err){
+          res.status(500).send("error 400 al consultar proyectos")
+      }
+
+      else{
+          res.json(result)
+      }
+  }).populate("lider")
+
+} )
+
+
+app.get("/inscripciones" , (req,res)=>{
+  console.log("alguien hizo get en la ruta /inscripciones")
+
+  inscripcioneModel.find((err,result) =>{
+
+      if(err){
+          res.status(500).send("error 400 al consultar inscripciones")
+      }
+
+      else{
+          res.json(result)
+      }
+  }).populate("estudiante").populate("proyecto")
+
+} )
+
+
+app.get("/avance" , (req,res)=>{
+  console.log("alguien hizo get en la ruta /avances")
+
+  avanceModel.find((err,result) =>{
+
+      if(err){
+          res.status(500).send("error 400 al consultar avances")
+      }
+
+      else{
+          res.json(result)
+      }
+  }).populate("proyecto")
+
+} )
