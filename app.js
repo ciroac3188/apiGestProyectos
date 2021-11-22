@@ -1,5 +1,5 @@
 /* import express from "express"; */  //nueva notacion ES6
-
+const dotenv = require('dotenv').config()
 const express = require("express")
 const app = express()
 const conexion = require("./db")
@@ -47,7 +47,7 @@ app.get("/",(req,res)=>{
 res.send(" <h1><a href=\'http://localhost:3000/usuarios\'> Hola este es el backend Tipo REST de Insert Name 🐱‍👤</a> </br> <a href=\'http://localhost:3000/graphql\'> Hola este es el backend Tipo GraphQL de Insert Name 🐱‍👤</a> </h1>")
 })
 
-app.listen(3000 , async ()=>{
+app.listen({port:process.env.PORT || 4001} , async ()=>{
 console.log("BackEnd Tipo REST Insert Name working in 🖥️ -> http://localhost:3000")
 console.log("BackEnd Tipo GraphQL Insert Name working in 🕸️ -> http://localhost:3000/graphql")
 await server.start()

@@ -2,7 +2,7 @@
   "name": "micrud",
   "version": "1.0.0",
   "description": "crud hecho por andres",
-  "main": "index.js",
+  "main": "app.js",
   "author": "andrés",
   "license": "MIT",
   "dependencies": {
