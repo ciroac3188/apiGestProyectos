@@ -1,0 +1,12 @@
+
+
+notas de dependencias que use para esta api:
+
+yarn init
+yarn add express
+yarn add mongoose
+npm install -g nodemon # or using yarn: yarn global add nodemon
+yarn add dotenv
+
+
+
