@@ -8,5 +8,16 @@ yarn add mongoose
 npm install -g nodemon # or using yarn: yarn global add nodemon
 yarn add dotenv
 
+///////////
+add graphql al proyecto con estas dependencias  :D
+
+yarn add graphql
+yarn add apollo-server-express
+yarn add cors
+
+documentacion que segui en :
+///https://www.npmjs.com/package/apollo-server
+
+
 
 
