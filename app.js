@@ -1,53 +1,53 @@
 /* import express from "express"; */  //nueva notacion ES6
+const { ApolloServer } = require('apollo-server-express');
 const dotenv = require('dotenv').config()
 const express = require("express")
-const app = express()
 const conexion = require("./db")
-////////////////imports sacados de documentacion npm
 var cors = require('cors')
+const app = express()
 app.use(cors())
-const { ApolloServer, gql } = require('apollo-server-express');
-///////////////////////////
-// The GraphQL schema
-const typeDefs = gql`
-  type Query {
-    "A simple type for getting started!"
-    hello: String
-  }
-`;
 
-// A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    hello: () => 'world',
-  },
-};
 
-///////defino server apollo
-const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+
+
+const {usuariotypeDefs} = require("./typeDefs/usuariotypeDefs")
+const {usuarioresolvers} = require("./resolvers/usuarioresolvers") 
+
+const {proyectotypeDefs} = require("./typeDefs/proyectotypeDefs")
+const {proyectoresolvers} = require("./resolvers/proyectoresolvers") 
+
+const {inscripciontypeDefs} = require("./typeDefs/inscripciontypeDefs")
+const {inscripcionresolvers} = require("./resolvers/inscripcionresolvers") 
+
+const {avancetypeDefs} = require("./typeDefs/avancetypeDefs")
+const {avanceresolvers} = require("./resolvers/avanceresolvers") 
+
+/////////defino server apollo con los cosos de graphql
+const server = new ApolloServer({                         
+    typeDefs:[usuariotypeDefs , proyectotypeDefs, inscripciontypeDefs, avancetypeDefs],
+    resolvers:[usuarioresolvers , proyectoresolvers, inscripcionresolvers, avanceresolvers]
   });
-//////////
 
-app.use(express.urlencoded({extended:true}))
-app.use(express.json())
-
+///////// rutas :D//////////////////////////////////////
 const usuarios = require("./rutas/usuarios")
 const proyectos = require("./rutas/proyectos")
 const avances = require("./rutas/avances")
 const inscripciones = require("./rutas/inscripciones")
-
-app.use(usuarios)
-app.use(proyectos)
-app.use(avances)
-app.use(inscripciones)
-
+// ruta raiz bienvenida  
 app.get("/",(req,res)=>{
-res.send(" <h1><a href=\'http://localhost:3000/usuarios\'> Hola este es el backend Tipo REST de Insert Name 🐱‍👤</a> </br> <a href=\'http://localhost:3000/graphql\'> Hola este es el backend Tipo GraphQL de Insert Name 🐱‍👤</a> </h1>")
-})
+  res.send(" <h1><a href=\'http://localhost:3000/usuarios\'> Hola este es el backend Tipo REST de Insert Name 🐱‍👤</a> </br> <a href=\'http://localhost:3000/graphql\'> Hola este es el backend Tipo GraphQL de Insert Name 🐱‍👤</a> </h1>")
+  })
+//////////middleware////////////////////////////////////
+app.use(express.urlencoded({extended:true}))
+app.use(express.json())
+app.use(usuarios , proyectos , avances , inscripciones)
+///////////////////////////////////////////////////////
 
-app.listen({port:process.env.PORT || 4001} , async ()=>{
+
+
+
+
+app.listen({port:process.env.PORT || 3000} , async ()=>{
 console.log("BackEnd Tipo REST Insert Name working in 🖥️ -> http://localhost:3000")
 console.log("BackEnd Tipo GraphQL Insert Name working in 🕸️ -> http://localhost:3000/graphql")
 await server.start()
