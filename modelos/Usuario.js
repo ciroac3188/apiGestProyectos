@@ -15,7 +15,10 @@ const usuarioShema = new Shema ({
     nombreCompleto: String,
     clave: String,
     tipoUsuario: String,
-    estado: String
+    estado: {
+        type: String,
+        default:"Pendiente",
+    }
 
 },  {versionKey:false})
 

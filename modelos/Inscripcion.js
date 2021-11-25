@@ -21,7 +21,9 @@ const inscripcionShema = new Shema ({
         
 
 
-},  {versionKey:false})
+},  {versionKey:false,},
+    
+)
 
 module.exports = mongoose.model("inscripciones" ,inscripcionShema )
 
