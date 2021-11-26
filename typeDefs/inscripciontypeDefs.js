@@ -5,6 +5,7 @@ const Inscripcion = require("../modelos/Inscripcion.js")
 
 module.exports.inscripciontypeDefs = gql`
 type Inscripcion{
+    _id: ID!
     proyecto:Proyecto,
     estudiante: Usuario,
     estado: String,

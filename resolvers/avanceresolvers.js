@@ -6,9 +6,19 @@ module.exports.avanceresolvers = {
       testA: () => 'hola desde avance',
       Avances: async (parent, args) => {
         if (Object.keys(args).includes('_id')) {
-        const avances = await Avance.find({_id:args._id}).populate("proyecto");
+        const avances = await Avance.find({_id:args._id}).populate({
+          path:"proyecto",
+          populate:({
+            path:"lider"
+          })
+        });; 
         return avances;}
-        else{const avances = await Avance.find().populate("proyecto");
+        else{const avances = await Avance.find().populate({
+          path:"proyecto",
+          populate:({
+            path:"lider"
+          })
+        }); 
         return avances;}
       },
     },

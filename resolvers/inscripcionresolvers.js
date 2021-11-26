@@ -6,9 +6,19 @@ module.exports.inscripcionresolvers = {
       testi: () => 'hola desde inscripcion',
       Inscripciones: async (parent, args) => {
         if (Object.keys(args).includes('_id')) {
-        const inscripciones = await Inscripcion.find({_id:args._id}).populate("estudiante").populate("proyecto");
+        const inscripciones = await Inscripcion.find({_id:args._id}).populate("estudiante").populate({
+          path:"proyecto",
+          populate:({
+            path:"lider"
+          })
+        }); 
         return inscripciones;}
-        else{const inscripciones = await Inscripcion.find().populate("estudiante").populate("proyecto");
+        else{const inscripciones = await Inscripcion.find().populate("estudiante").populate({
+          path:"proyecto",
+          populate:({
+            path:"lider"
+          })
+        }) 
         return inscripciones;}
       },
     },

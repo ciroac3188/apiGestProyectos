@@ -10,9 +10,9 @@ module.exports.proyectoresolvers = {
       
       Proyectos: async (parent, args) => {
         if (Object.keys(args).includes('_id')) {
-        const proyectos = await Proyecto.find({_id:args._id}).populate("inscritos").populate("lider");
+        const proyectos = await Proyecto.find({_id:args._id}).populate("lider").populate("inscritos").populate("avances") ;
         return proyectos;}
-        else{const proyectos = await Proyecto.find().populate("inscritos").populate("lider");
+        else{const proyectos = await Proyecto.find().populate("lider").populate("inscritos").populate("avances") ;
         return proyectos;}
       },
 

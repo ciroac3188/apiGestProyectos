@@ -4,6 +4,7 @@ const { gql } = require('apollo-server-express');
 
 module.exports.avancetypeDefs = gql`
 type Avance{
+    _id: ID!
     proyecto:Proyecto,
     fechaAvance: String,
     descripcion: String,

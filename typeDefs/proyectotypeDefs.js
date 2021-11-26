@@ -14,8 +14,16 @@ type Usuario {
     estado: String
   }
 
- 
+type Avance{
+    _id: ID!
+    proyecto:Proyecto,
+    fechaAvance: String,
+    descripcion: String,
+    observacionesLider: String,
+              
+} 
 
+ 
 
 type Proyecto{
     _id: ID!,
@@ -27,10 +35,12 @@ type Proyecto{
     fechaFin: String,
     estado: String,
     faseProyecto: String,
-    inscritos: [String],        
-    avances: [String],         
+    inscritos: [Usuario],        
+    avances: [Avance],         
     lider: Usuario
 }
+
+
 type Query {
   "A simple type for getting started!"
   testp: String
@@ -49,8 +59,8 @@ crearProyecto(
     estado: String,
     faseProyecto: String,
     inscritos: [String],        
-    avances: [String],         
-    lider: String
+    avances: [ID],         
+    lider: ID
 
 ):Proyecto
 
@@ -65,8 +75,8 @@ editarProyecto(
     estado: String,
     faseProyecto: String,
     inscritos: [String],        
-    avances: [String],         
-    lider: String
+    avances: [ID],         
+    lider: ID
 
 ):Proyecto
 
