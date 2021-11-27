@@ -3,6 +3,10 @@ const { gql } = require('apollo-server-express');
 
 
 module.exports.usuariotypeDefs = gql`
+type Token{
+  token:String
+  error:String
+}
  type Usuario {
     _id: ID!
     correo: String
@@ -29,6 +33,23 @@ type Mutation{
     estado: String
   
   ):Usuario
+
+  crearRegistro(
+    correo: String
+    identificacion: String
+    nombreCompleto: String
+    clave: String
+    tipoUsuario: String
+    estado: String
+  
+  ):Token
+
+  login(
+    correo: String!
+    clave: String!
+  ):Token
+
+  testToken:Token
 
   editarUsuario(
     _id:ID!
