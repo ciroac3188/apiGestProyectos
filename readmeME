@@ -26,3 +26,13 @@ https://www.npmjs.com/package/bcrypt
 
 https://www.npmjs.com/package/jsonwebtoken
 
+
+virtual example:
+
+localfield hace referencia a la ID de usuario actual , que en el proyecto se llama lider 
+
+userSchema.virtual('proyectosLiderados', {
+  ref: 'Proyecto',
+  localField: '_id',
+  foreignField: 'lider',
+});

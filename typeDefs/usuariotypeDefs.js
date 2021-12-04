@@ -15,6 +15,7 @@ type Token{
     clave: String
     tipoUsuario: String
     estado: String
+    
   }
 type Query {
   "A simple type for getting started!"

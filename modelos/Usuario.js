@@ -1,5 +1,6 @@
 const  mongoose  = require("mongoose")
 
+
 const Shema = mongoose.Schema
 
 
@@ -21,6 +22,13 @@ const usuarioShema = new Shema ({
     }
 
 },  {versionKey:false})
+
+/* usuarioShema.virtual('algo', {
+    ref: 'proyecto',
+    localField: '_id',
+    foreignField: 'presupuesto',
+  });
+   */
 
 module.exports = mongoose.model("usuarios" ,usuarioShema )
 

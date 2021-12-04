@@ -13,7 +13,7 @@ module.exports.usuarioresolvers = {
         if (Object.keys(args).includes('_id')) {
         const usuarios = await Usuario.find({_id:args._id});
         return usuarios;}
-        else{const usuarios = await Usuario.find();
+        else{const usuarios = await Usuario.find() ;
         return usuarios;}
       },
       
@@ -40,30 +40,52 @@ module.exports.usuarioresolvers = {
 
         login: async (parents,args) => {
 
+         
+
            const searchUser = await Usuario.findOne({correo:args.correo})
-           const validate = await bcrypt.compare(args.clave, searchUser.clave )
-           if(validate===true){
-
-            console.log(validate)
-           return{ token:  TokenGenerado({
-
-            _id: searchUser._id,
-            correo : searchUser.correo,
-            identificacion : searchUser.identificacion,
-            nombreCompleto : searchUser.nombreCompleto,
-            tipoUsuario : searchUser.tipoUsuario,
-            estado : searchUser.estado,
-
-           })}
+           if(searchUser != null){
+            const validate = await bcrypt.compare(args.clave, searchUser.clave )
+            if(validate===true){
  
-           }
+             console.log(validate)
+            return{ token:  TokenGenerado({
+ 
+             _id: searchUser._id,
+             correo : searchUser.correo,
+             identificacion : searchUser.identificacion,
+             nombreCompleto : searchUser.nombreCompleto,
+             tipoUsuario : searchUser.tipoUsuario,
+             estado : searchUser.estado,
+ 
+            })}
+  
+            }else {return {error : ":( la clave ingresada esta mal"  }}
+
+           }else {return {error : "El usuario no existe" }}
+
     
           },
 
 
           testToken: async (parents,args,context) => {
 
-            console.log("el context", context)
+            console.log("el context", context);
+
+            if(!context.userData){return {error : "token no valido" }}
+            else{ return{
+              token: TokenGenerado({
+
+                _id: context.userData._id,
+                correo : context.userData.correo,
+                identificacion : context.userData.identificacion,
+                nombreCompleto : context.userData.nombreCompleto,
+                tipoUsuario : context.userData.tipoUsuario,
+                estado : context.userData.estado,
+    
+               })
+            }
+            
+            }
 
      
            },
