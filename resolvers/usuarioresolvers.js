@@ -92,28 +92,36 @@ module.exports.usuarioresolvers = {
 
 
         crearRegistro: async (parents,args) => {
-          const salt = await bcrypt.genSalt(saltRounds)
-          const cifrado = await bcrypt.hash( args.clave, salt)
-           const usuariocreado =  await Usuario.create({
-            correo : args.correo,
-            identificacion : args.identificacion,
-            nombreCompleto : args.nombreCompleto,
-            clave : cifrado,
-            tipoUsuario : args.tipoUsuario,
-            estado : args.estado,
-           })
-           return {token: TokenGenerado({
+          const searchUser = await Usuario.findOne({correo:args.correo})
+          
+          if(searchUser == null){
 
-            _id: usuariocreado._id,
-            correo : usuariocreado.correo,
-            identificacion : usuariocreado.identificacion,
-            nombreCompleto : usuariocreado.nombreCompleto,
-            /* clave : usuariocreado.clave, */
-            tipoUsuario : usuariocreado.tipoUsuario,
-            estado : usuariocreado.estado,
+            const salt = await bcrypt.genSalt(saltRounds)
+            const cifrado = await bcrypt.hash( args.clave, salt)
+             const usuariocreado =  await Usuario.create({
+              correo : args.correo,
+              identificacion : args.identificacion,
+              nombreCompleto : args.nombreCompleto,
+              clave : cifrado,
+              tipoUsuario : args.tipoUsuario,
+              estado : args.estado,
+             })
+             return {token: TokenGenerado({
+  
+              _id: usuariocreado._id,
+              correo : usuariocreado.correo,
+              identificacion : usuariocreado.identificacion,
+              nombreCompleto : usuariocreado.nombreCompleto,
+              /* clave : usuariocreado.clave, */
+              tipoUsuario : usuariocreado.tipoUsuario,
+              estado : usuariocreado.estado,
+  
+             })
+            }
 
-           })
-          }
+          } 
+
+          {return {error : "El correo Ya existe en la BD :("  }}
           },
 
 
