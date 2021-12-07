@@ -32,7 +32,7 @@ module.exports.inscripcionresolvers = {
           estudiante: args.estudiante,
           estado: args.estado,
           fechaIngreso: args.fechaIngreso,
-          fechaEngreso: args.fechaEngreso
+          fechaEgreso: args.fechaEgreso
     
          })
          return inscripcioncreado},
