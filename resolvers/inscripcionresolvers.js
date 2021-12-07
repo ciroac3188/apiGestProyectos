@@ -51,7 +51,7 @@ module.exports.inscripcionresolvers = {
             { new: true }
           );
     
-          return proyectoEditado;},   
+          return inscripcionEditado;},   
 
           eliminarInscripcion: async (parent, args) => {
               const inscripcionDeleteado = await Inscripcion.findOneAndDelete({ _id: args._id });
