@@ -45,6 +45,7 @@ type Query {
   "A simple type for getting started!"
   testp: String
   Proyectos(_id:ID): [Proyecto]
+  ProyectosLite(filtro:ID): [Proyecto]
 }
 
 type Mutation{

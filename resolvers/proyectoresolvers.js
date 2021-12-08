@@ -16,7 +16,22 @@ module.exports.proyectoresolvers = {
         return proyectos;}
       },
 
+
+      ProyectosLite: async (parent, args) => {
+        if (Object.keys(args).includes('filtro')) {
+        const proyectos = await Proyecto.find({inscritos:args.filtro}).populate("lider").populate("inscritos").populate("avances") ;
+        return proyectos;}
+        else{const proyectos = await Proyecto.find().populate("lider").populate("inscritos").populate("avances") ;
+        return proyectos;}
+      },
+
+
+
+
     },
+
+
+    
 
     Mutation: {
 
