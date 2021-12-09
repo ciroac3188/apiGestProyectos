@@ -81,6 +81,17 @@ editarProyecto(
 
 ):Proyecto
 
+
+editarProyectoINSC(
+    _id:ID!,
+    inscritos: [String],        
+):Proyecto
+
+editarProyectoAVAN(
+    _id:ID!,
+    avances: [ID],        
+):Proyecto
+
 eliminarProyecto(
   _id:ID!
 ):Proyecto
